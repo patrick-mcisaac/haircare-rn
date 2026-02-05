@@ -1,14 +1,18 @@
 import { Tabs } from "expo-router"
 import React from "react"
 
+import { Colors } from "@/constants/theme"
+import { useColorScheme } from "@/hooks/use-color-scheme"
 import Entypo from "@expo/vector-icons/Entypo"
 
 export default function TabsLayout() {
+	const colorScheme = useColorScheme()
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: "#fff",
-				tabBarInactiveTintColor: "#777",
+				tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+				tabBarInactiveTintColor:
+					Colors[colorScheme ?? "light"].tabIconDefault,
 				headerShown: false,
 				tabBarStyle: {
 					backgroundColor: "#1e1e1e",
@@ -31,6 +35,21 @@ export default function TabsLayout() {
 					tabBarIcon: ({ color }) => (
 						<Entypo name="calendar" size={24} color={color} />
 					)
+				}}
+			/>
+			<Tabs.Screen
+				name="customers/index"
+				options={{
+					title: "Customers",
+					tabBarIcon: ({ color }) => (
+						<Entypo name="user" size={24} color={color} />
+					)
+				}}
+			/>
+			<Tabs.Screen
+				name="customers/[id]"
+				options={{
+					href: null
 				}}
 			/>
 		</Tabs>

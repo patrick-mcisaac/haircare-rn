@@ -1,5 +1,6 @@
 import { Stack } from "expo-router"
 
+import { QueryClientProvider } from "@/providers/QueryClientProvider"
 import "../styles/global.css"
 
 export const unstable_settings = {
@@ -10,8 +11,10 @@ export default function RootLayout() {
 	// const colorScheme = useColorScheme()
 
 	return (
-		<Stack>
-			<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-		</Stack>
+		<QueryClientProvider>
+			<Stack>
+				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+			</Stack>
+		</QueryClientProvider>
 	)
 }
