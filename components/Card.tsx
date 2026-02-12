@@ -18,13 +18,13 @@ export default function Card({ person }: CardProps) {
 					params: { id: person.id }
 				})
 			}>
-			<View className="p-10 bg-transparent self-center mt-10 rounded-lg gap-[2rem] w-[75%] border-gray-900 shadow-sm border">
-				<Text className="text-2xl text-primary text-center">
+			<View className="p-10 bg-primary self-center mt-10 rounded-lg gap-[2rem] w-[75%] border-gray-900 shadow-sm border">
+				<Text className="text-2xl text-secondary text-center">
 					{person.firstName} {person.lastName}
 				</Text>
 				<View className="flex-row flex-wrap gap-2 justify-around">
-					<Text className="text-primary">{person.email}</Text>
-					<Text className="text-primary">{person.phoneNumber}</Text>
+					<Text className="text-secondary">{person.email}</Text>
+					<Text className="text-secondary">{person.phoneNumber}</Text>
 				</View>
 			</View>
 		</Pressable>

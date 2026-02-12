@@ -1,6 +1,7 @@
 import { getAppointments } from "@/data/appointments"
 import { Appointment } from "@/types/AppointmentTypes"
 import { TableDataType } from "@/types/TableDataTypes"
+import { formatDate } from "@/utils/formatDate"
 import { useQuery } from "@tanstack/react-query"
 import React, { useEffect, useState } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
@@ -17,8 +18,8 @@ export default function Appointments() {
 	useEffect(() => {
 		if (appointments) {
 			const td = appointments.map((a: Appointment) => [
-				a.customerId,
-				new Date(a.appointmentTime).toLocaleString(),
+				`${a.customer?.firstName} ${a.customer?.lastName}`,
+				formatDate(a.appointmentTime as string),
 				"cost",
 				<Pressable onPress={() => {}} style={styles.button} key={a.id}>
 					<Text style={styles.header}>Edit</Text>
@@ -69,15 +70,16 @@ const styles = StyleSheet.create({
 		color: "#c7c7c7ff"
 	},
 	table: {
-		width: 500,
+		width: 350,
 		borderWidth: 1
 	},
 	row: {
 		borderWidth: 1,
 		backgroundColor: "#29292e",
-		height: 60,
 		flexDirection: "row",
-		justifyContent: "space-between"
+		justifyContent: "space-between",
+		height: 90,
+		paddingRight: 5
 	},
 	header: {
 		fontSize: 17,
@@ -89,8 +91,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: "#25253e",
 		height: 40,
-		width: "60%",
-		marginLeft: "15%",
+		width: "100%",
 		borderRadius: 20
 	}
 })
