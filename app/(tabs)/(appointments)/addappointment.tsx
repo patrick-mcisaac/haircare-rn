@@ -6,6 +6,7 @@ import DateTimePicker, {
 import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import {
+	Button,
 	FlatList,
 	Modal,
 	StyleSheet,
@@ -19,7 +20,7 @@ export default function AddAppointment() {
 	const [selectedService, setSelectedService] = useState<Service | null>(null)
 
 	const [date, setDate] = useState<Date>(new Date())
-	const [time, setTime] = useState<Date>(new Date())
+	const [time, setTime] = useState<number>(0)
 
 	const { data: services, isSuccess } = useQuery({
 		queryKey: ["services"],
@@ -36,6 +37,10 @@ export default function AddAppointment() {
 			setDate(selectedDate)
 		}
 	}
+
+	const timeData = [8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+	const onSubmit = () => {}
 
 	return (
 		isSuccess && (
@@ -110,13 +115,32 @@ export default function AddAppointment() {
 				</View>
 				<View>
 					<Text style={styles.labelText}>Pick a time</Text>
-
-					<DateTimePicker
-						value={time}
-						mode="time"
-						onChange={onChange}
-						minimumDate={new Date()}
+					<FlatList
+						contentContainerStyle={[
+							{ flex: 1 / 4, padding: 0, gap: 2 }
+						]}
+						data={timeData}
+						renderItem={({ item }) => (
+							<TouchableOpacity
+								style={[
+									// styles.selector,
+									item === time ? styles.optionSelected : ""
+								]}
+								onPress={() => setTime(item)}>
+								<Text
+									style={[
+										time === item ?
+											styles.selectorText
+										:	{ color: "white" }
+									]}>
+									{`${item} : 00`}
+								</Text>
+							</TouchableOpacity>
+						)}
 					/>
+				</View>
+				<View>
+					<Button onPress={onSubmit} title="Book"></Button>
 				</View>
 			</View>
 		)
@@ -140,6 +164,17 @@ const styles = StyleSheet.create({
 		borderColor: "#ccc",
 		borderRadius: 8,
 		backgroundColor: "white"
+	},
+	selectorTime: {
+		flexDirection: "column",
+		justifyContent: "space-between",
+		alignItems: "center",
+		padding: 16,
+		borderWidth: 1,
+		borderColor: "#ccc",
+		borderRadius: 8,
+		backgroundColor: "white",
+		gap: 20
 	},
 	selectorText: {
 		fontSize: 16,
