@@ -3,6 +3,7 @@ import { Appointment } from "@/types/AppointmentTypes"
 import { TableDataType } from "@/types/TableDataTypes"
 import { formatDate } from "@/utils/formatDate"
 import { useQuery } from "@tanstack/react-query"
+import { Link } from "expo-router"
 import React, { useEffect, useState } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -35,6 +36,13 @@ export default function Appointments() {
 				<Text className="text-4xl font-bold text-[#efe] tracking-wider">
 					Appointments
 				</Text>
+			</View>
+			<View>
+				<Pressable style={styles.button}>
+					<Link href={"/(tabs)/(appointments)/addappointment"}>
+						<Text style={styles.header}>Add Appointment</Text>
+					</Link>
+				</Pressable>
 			</View>
 
 			<View style={styles.container}>

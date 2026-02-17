@@ -29,12 +29,19 @@ export default function TabsLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="appointments"
+				name="(appointments)/appointments"
 				options={{
 					title: "Appointments",
 					tabBarIcon: ({ color }) => (
 						<Entypo name="calendar" size={24} color={color} />
 					)
+				}}
+			/>
+			<Tabs.Screen
+				name="(appointments)/addappointment"
+				options={{
+					title: "Add",
+					href: null
 				}}
 			/>
 			<Tabs.Screen
